@@ -7,17 +7,21 @@ Projet vidéo construit avec [Remotion](https://www.remotion.dev) (React → vid
 ```bash
 npm install
 npm run dev      # Remotion Studio (aperçu interactif)
-npm run build    # rendu MP4 → out/video.mp4
+npm run build    # rendu MP4 → out/reel.mp4
 npm run still    # image fixe → out/still.png
 ```
 
 ## Structure
 
-- `src/index.ts` — point d'entrée (`registerRoot`)
-- `src/Root.tsx` — déclaration des compositions (taille, fps, durée)
-- `src/Main.tsx` — composition principale
-- `public/` — médias (images, sons, vidéos) utilisables via `staticFile()`
-- `remotion.config.ts` — configuration de la CLI
+- `src/Root.tsx` — composition `Reel` (1080 × 1920, 30 i/s)
+- `src/Reel.tsx` — assemblage des calques
+- `src/data/edit.ts` — montage (EDL), punch-ins, B-roll, musique
+- `src/data/captions.ts` — sous-titres (**brouillon à corriger avec le script exact**)
+- `src/data/graphics.ts` — habillage graphique et effets sonores
+- `src/components/` — footage, B-roll, graphiques, sous-titres, carte de fin, mixage
+- `public/footage/` — prise source + voix traitée (`scripts/process-voice.sh`)
+- `public/sfx/`, `public/fonts/`, `public/broll/` — SFX générés, polices (OFL), clips IA
+- `docs/PLAN_DE_PRODUCTION.md` — plan de production complet (sections A–K)
 
 ## Navigateur
 

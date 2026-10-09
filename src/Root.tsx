@@ -1,17 +1,19 @@
-import { Composition } from "remotion";
-import { Main } from "./Main";
+import { Composition, continueRender, delayRender } from "remotion";
+import { fontsReady } from "./fonts";
+import { Reel } from "./Reel";
+import { FPS, TOTAL_FRAMES } from "./data/edit";
 
-// Toutes les compositions du projet sont déclarées ici.
-export const RemotionRoot: React.FC = () => {
-  return (
-    <Composition
-      id="Main"
-      component={Main}
-      durationInFrames={150}
-      fps={30}
-      width={1920}
-      height={1080}
-      defaultProps={{ title: "Paradox" }}
-    />
-  );
-};
+const fontHandle = delayRender("Chargement des polices");
+fontsReady.then(() => continueRender(fontHandle));
+
+// Format vertical 9:16 pour Reels / TikTok / Shorts.
+export const RemotionRoot: React.FC = () => (
+  <Composition
+    id="Reel"
+    component={Reel}
+    durationInFrames={TOTAL_FRAMES}
+    fps={FPS}
+    width={1080}
+    height={1920}
+  />
+);
