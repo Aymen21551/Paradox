@@ -18,7 +18,7 @@
 | Public | Professionnels tunisiens (marketing, entrepreneurs, freelances) curieux de l'IA appliquée. |
 | Durée | Prise brute 55,2 s → **montage 49,0 s** (45,5 s de parole + 3,5 s de carte de fin). |
 | Format | 9:16, 1080 × 1920, 30 i/s, H.264 + AAC. |
-| Style visuel | Talking-head en extérieur (bord de mer, plein jour) conservé tel quel ; habillage sombre bleu/violet pour graphiques et plans de coupe. |
+| Style visuel | Talking-head détouré et posé sur un nouveau décor (par défaut : plage aux palmiers, lumière de plein jour cohérente avec la prise) ; habillage sombre bleu/violet pour graphiques et plans de coupe. |
 | Progression émotionnelle | Accroche chiffrée (curiosité) → promesse concrète (gestion de projet) → projection (« toi, en tant qu'expert marketing ») → solution (webinar) → CTA. |
 | Hypothèses | Une seule caméra (smartphone) ; pas de musique fournie ; pas de clips IA fournis (remplacés par du motion design) ; le passage 40,6 → 48,45 s est un premier essai du CTA, repris ensuite. |
 | Stratégie de rétention | Gros plan + chiffre « 10% » dès la 1re image, changement visuel toutes les 3–4 s motivé par le sens, plans de coupe sur les idées abstraites, CTA visuel (bulle « مهتم ») synchronisé. |
@@ -132,6 +132,14 @@ Sous-titres : Cairo 800, 62 px, blanc + contour noir, RTL, 380 px au-dessus du b
 
 ## H. Montage — réalisé dans Remotion
 
+### Changement de décor
+
+- Détourage image par image avec ISNet (`@imgly/background-removal-node`, modèle *medium*, hors ligne).
+- `scripts/build-person.sh` : masque lissé dans le temps (anti-scintillement), érosion 1 px (supprime le liseré de ciel), bords adoucis ; personne agrandie (Lanczos + netteté) → `public/footage/person.webm` (VP9 avec transparence).
+- Décor au choix dans `src/data/edit.ts` → `BACKGROUND = BACKGROUNDS.palms | lagoon | sunset` (ou `null` pour la prise d'origine).
+- Décor flouté (profondeur de champ), dérive lente, parallaxe : le décor suit les punch-ins à 45 %.
+- Étalonnage de la personne par décor (le coucher de soleil réclame un voile chaud).
+
 1. EDL : `0,30–40,60` + `48,45–53,60` (temps source).
 2. Recadrages : voir D (`SHOTS` dans `src/data/edit.ts`).
 3. Étalonnage : contraste +7 %, saturation +8 %, luminosité −2 %, vignette douce.
@@ -151,7 +159,9 @@ Pour CapCut à la place : mêmes points de coupe, mêmes échelles (zoom 118 %, 
 | Arabe RTL lisible | ✅ Cairo, `dir="rtl"` |
 | URL exacte | ✅ `kaisystem.ai/go/aymen-gabsi` (lien complet : https://kaisystem.ai/go/aymen-gabsi) |
 | Aucune promesse ajoutée | ✅ pas de « gratuit », « places limitées », chiffres inventés |
-| Netteté | ⚠️ source 478 × 850 agrandie ×2,26 : image douce |
+| Netteté | ⚠️ source 478 × 850 agrandie ×2,26 : image douce. Un agrandissement IA (Swin2SR) a été testé : 45 s/image sur ce serveur, gain faible → non retenu |
+| Droits des décors | ⚠️ les décors 2 et 3 sont des captures d'un modèle TikTok d'un autre créateur : droits non vérifiés pour un usage commercial |
+| Raccord lumière | ⚠️ à valider à l'œil : lumière frontale du tournage vs lumière du décor |
 | Synchro sous-titres | ⚠️ phrase par phrase, issue de la détection de pauses ; à revoir après correction du texte |
 
 ## J. Notes de langue
@@ -164,6 +174,10 @@ erreur de transcription d'une expression voulue.
 - [ ] Envoyer le **script exact** → corriger `src/data/captions.ts`, passer `CAPTIONS_VERIFIED = true` (retire le badge DRAFT et le jaune).
 - [ ] Envoyer la **vidéo originale en pleine définition** → remplacer `public/footage/take1.mp4` (et régénérer `voice.m4a`).
 - [ ] Confirmer la coupe du premier essai du CTA (40,6 → 48,45 s).
+- [ ] Remplacer les décors par des images libres de droits ou générées (prompt ci-dessous), surtout pour une publicité.
 - [ ] Optionnel : générer B1–B3 avec les prompts E.
+
+Prompt décor (même cadrage, lumière cohérente avec la prise) :
+> Vertical 9:16 photograph, tropical beach with tall coconut palms framing a turquoise bay and a limestone island, bright late-morning sun from the front-left, clear blue sky with soft clouds, eye-level camera at chest height, shallow depth of field, photorealistic, sharp, natural colors. Empty center area for a person to be composited. No people, no text, no logos, no watermark.
 - [ ] Optionnel : musique sous licence.
 - [ ] `npm run build`, puis vérification finale.

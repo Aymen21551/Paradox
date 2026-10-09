@@ -52,6 +52,41 @@ export const BROLL_SOURCES: Record<BrollId, string | null> = {
   marketing: null,
 };
 
+// Changement de décor : la personne est détourée (public/footage/person.webm,
+// vidéo avec transparence) et posée sur une photo. null = prise d'origine.
+export type Background = {
+  src: string;
+  // Étalonnage appliqué à la personne pour l'accorder à la lumière du décor.
+  personFilter: string;
+  // Voile de couleur sur la personne (lumière ambiante du décor).
+  personTint?: string;
+  // Flou du décor (profondeur de champ), en px.
+  blur: number;
+};
+
+export const BACKGROUNDS = {
+  palms: {
+    src: "backgrounds/bg3_palms.jpg",
+    personFilter: "contrast(1.05) saturate(1.05) brightness(1.0)",
+    personTint: "rgba(255, 220, 160, 0.06)",
+    blur: 5,
+  },
+  lagoon: {
+    src: "backgrounds/bg2_lagoon.jpg",
+    personFilter: "contrast(1.04) saturate(1.0) brightness(0.98)",
+    personTint: "rgba(120, 220, 200, 0.06)",
+    blur: 6,
+  },
+  sunset: {
+    src: "backgrounds/bg1_sunset.jpg",
+    personFilter: "contrast(1.1) saturate(0.9) brightness(0.88) sepia(0.25)",
+    personTint: "rgba(255, 140, 40, 0.16)",
+    blur: 4,
+  },
+} satisfies Record<string, Background>;
+
+export const BACKGROUND: Background | null = BACKGROUNDS.palms;
+
 // Musique sous licence à déposer dans public/music/ (null = pas de musique).
 export const MUSIC_SRC: string | null = null;
 
