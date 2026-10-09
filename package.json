@@ -1,0 +1,23 @@
+{
+  "name": "paradox",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Paradox — vidéos construites avec Remotion",
+  "scripts": {
+    "dev": "remotion studio",
+    "build": "remotion render Main out/video.mp4",
+    "still": "remotion still Main out/still.png --frame=30",
+    "upgrade": "remotion upgrade",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.534",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "remotion": "4.0.534"
+  },
+  "devDependencies": {
+    "@types/react": "19.1.8",
+    "typescript": "5.8.3"
+  }
+}
