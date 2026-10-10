@@ -10,13 +10,23 @@ marqueurs, rendu — et import direct du montage Paradox.
 2. **Préférences → Système → Général → External scripting using : `Local`**,
    puis redémarrez Resolve.
 
-> Les anciennes versions gratuites de Resolve n'acceptent le scripting externe
-> que dans la version **Studio**. Si `get_status` répond « Impossible de
-> joindre DaVinci Resolve » alors que le réglage est bon, c'est la cause.
+> **Version gratuite :** depuis **Resolve 21.1**, le scripting externe est
+> réservé à **Resolve Studio** (la version gratuite ne le garde que dans la
+> console interne). Avec la version gratuite, ce pont fonctionne jusqu'à 21.0.x.
+> Si `get_status` répond « Impossible de joindre DaVinci Resolve » alors que le
+> réglage est bon, c'est la cause.
+
+### Resolve Studio 21.1 et plus : connecteur intégré
+
+Resolve Studio 21.1 contient son propre serveur MCP (**File → Setup AI
+Assistants**), qui se branche directement sur Claude. Vous pouvez l'utiliser à
+la place de ce serveur, ou en plus : les deux cohabitent sans problème. Ce
+serveur-ci garde les outils propres au projet Paradox (`import_paradox_edit`,
+`import_rendered_reel`).
 
 ## 2. Installer Python et le paquet MCP
 
-Python 3.10 à 3.12, **64 bits** ([python.org](https://www.python.org/downloads/)).
+Python 3.10 ou plus récent, **64 bits** ([python.org](https://www.python.org/downloads/)).
 
 ```bash
 git clone https://github.com/aymen21551/paradox.git

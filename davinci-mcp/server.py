@@ -79,7 +79,8 @@ def resolve():
         raise RuntimeError(
             "Impossible de joindre DaVinci Resolve. Il doit être ouvert, et "
             "Préférences > Système > Général > « External scripting using » doit "
-            "être sur « Local »."
+            "être sur « Local ». Depuis Resolve 21.1, le scripting externe exige "
+            "Resolve Studio (la version gratuite ne le permet plus)."
         )
     _resolve = r
     return r
