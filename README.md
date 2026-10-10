@@ -21,6 +21,7 @@ npm run still    # image fixe → out/still.png
 - `src/components/` — footage, B-roll, graphiques, sous-titres, carte de fin, mixage
 - `public/footage/` — prise source + voix traitée (`scripts/process-voice.sh`)
 - `public/sfx/`, `public/fonts/`, `public/broll/` — SFX générés, polices (OFL), clips IA
+- `davinci-mcp/` — pont Claude ↔ DaVinci Resolve (serveur MCP, voir son README)
 - `docs/PLAN_DE_PRODUCTION.md` — plan de production complet (sections A–K)
 
 ## Navigateur
